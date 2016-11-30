@@ -6,7 +6,22 @@ function printMessage(username, badgeCount, points) {
     console.log(message);
 };
 
+try {
 var request = https.get("https://teamtreehouse.com/" + username + ".json", function(response) {
-    console.log(response.statusCode);
-});
+    var body = "";
 
+    console.log(response.statusCode);
+
+    response.on('data', function(chunk){
+        body += chunk;
+    });
+
+    response.on('end', function(){
+        console.log(body);
+    });
+});
+} catch(error) {
+
+    console.error(error.message);
+
+}
